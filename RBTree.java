@@ -111,14 +111,14 @@ public class RBTree implements IRedBlackTree {
                 // the node is left child and it's parent is a left child
                 rightRotate(node.parent.parent);
             } else
-                // the node is a right child and it's parent is a left child
+                // the node is a left child and it's parent is a right child
                 right_leftRotate(node.parent.parent);
         } else {
             if (node.parent.parent.left != node.parent)
                 // the node is a right child and it's parent is a right child
                 leftRotate(node.parent.parent);
             else
-                // the node is a left child and it's parent is a right child
+                // the node is a right child and it's parent is a left child
                 left_rightRotate(node.parent.parent);
         }
     }
