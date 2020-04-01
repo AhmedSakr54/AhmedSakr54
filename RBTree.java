@@ -102,16 +102,23 @@ public class RBTree implements IRedBlackTree {
         rightRotate(node.right);
         leftRotate(node);
     }
+    /*
+        the parameter is the node that created the problem in the tree i.e. the node that made the tree contain 2 consecutive red nodes
+     */
     private void rotateTree(Node node) {
         if (node.parent.right != node) {
             if (node.parent.parent.right != node.parent) {
+                // the node is left child and it's parent is a left child
                 rightRotate(node.parent.parent);
             } else
+                // the node is a right child and it's parent is a left child
                 right_leftRotate(node.parent.parent);
         } else {
             if (node.parent.parent.left != node.parent)
+                // the node is a right child and it's parent is a right child
                 leftRotate(node.parent.parent);
             else
+                // the node is a left child and it's parent is a right child
                 left_rightRotate(node.parent.parent);
         }
     }
