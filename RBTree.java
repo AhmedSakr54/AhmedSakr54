@@ -135,7 +135,28 @@ public class RBTree implements IRedBlackTree {
 
     @Override
     public int calculateHeight() {
-        return 0;
+        int leftheight=0;
+        int rightheight=0;
+        Node temp = this.root;
+        while(temp != null){
+
+            leftheight ++;
+            temp = temp.left;
+
+        }
+        temp=this.root;
+        while(temp != null){
+
+            rightheight ++;
+            temp = temp.right;
+
+        }
+
+        if(leftheight >= rightheight)
+            return leftheight+1;
+        else
+            return rightheight+1;
+
     }
 
 
