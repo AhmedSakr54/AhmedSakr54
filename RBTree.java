@@ -2,7 +2,7 @@ public class RBTree implements IRedBlackTree {
     private int size; // size will be incremented with each insertion
     private Node root;
 
-    private class Node {
+    public class Node {
         Comparable data;
         Node parent;
         Node left;
@@ -14,6 +14,10 @@ public class RBTree implements IRedBlackTree {
             isRed = true; // assume every newly inserted node is red
             parent = left = right = null;
         }
+    }
+    public RBTree() {
+        this.size = 0;
+        this.root = null;
     }
 
     public int getSize() {
@@ -124,13 +128,32 @@ public class RBTree implements IRedBlackTree {
     }
 
     @Override
-    public boolean search(Comparable data) {
-        return false;
+    public boolean search(Node node, Comparable data) {
+        if (node == null)
+            return false;
+        if (node.data.compareTo(data) > 0)
+            return search(node.left, data);
+        if (node.data.compareTo(data) < 0)
+            return search(node.right, data);
+        return true;
     }
+
+    private Node insert(Node parent, Comparable data) {
+        if(parent == null)
+            return new Node(data);
+        else if(parent.data.compareTo(data)> 0)
+            parent.left = insert(parent.left, data);
+        else if(parent.data.compareTo(data) < 0)
+            parent.right = insert(parent.right, data);
+        return parent;
+    }
+
 
     @Override
     public void insert(Comparable data) {
-
+        this.root = insert(this.root, data);
+        this.size++;
+        this.root.isRed = false;
     }
 
     @Override
@@ -157,6 +180,13 @@ public class RBTree implements IRedBlackTree {
         else
             return rightheight+1;
 
+    }
+    public void inOrder(Node node) {
+        if (node != null) {
+            inOrder(node.left);
+            System.out.println(node.data);
+            inOrder(node.right);
+        }
     }
 
 

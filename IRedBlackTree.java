@@ -10,7 +10,7 @@ public interface IRedBlackTree {
         0 if obj1 is equal to obj2
         -1 if obj1 is smaller than obj2
      */
-    boolean search(Comparable data);
+    boolean search(RBTree.Node node,Comparable data);
 
     /*
         would probably contain a call to a private method
