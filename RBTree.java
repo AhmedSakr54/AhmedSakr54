@@ -115,16 +115,19 @@ public class RBTree implements IRedBlackTree {
                 // the node is left child and it's parent is a left child
                 System.out.println("help");
                 rightRotate(node.parent.parent);
-            } else
+            } else {
                 // the node is a left child and it's parent is a right child
                 right_leftRotate(node.parent.parent);
+            }
         } else {
-            if (node.parent.parent.left != node.parent)
+            if (node.parent.parent.left != node.parent) {
                 // the node is a right child and it's parent is a right child
                 leftRotate(node.parent.parent);
-            else
+            }
+            else {
                 // the node is a right child and it's parent is a left child
                 left_rightRotate(node.parent.parent);
+            }
         }
     }
 
@@ -166,27 +169,27 @@ public class RBTree implements IRedBlackTree {
         }
         else if (node.parent == null)
             return;
-        if (node.parent.isRed) {
+        if (node.parent.isRed && node.isRed) {
             correctTree(node);
         }
     }
-    private Node insert(Node parent, Comparable data) {
-        Node newNode = new Node(data);
-        if(parent == null) {
-            parent = newNode;
-        }
-        else if(parent.data.compareTo(data) > 0) {
-            parent.left = insert(parent.left, data);
-            parent.left.parent = parent;
-            checkColor(parent.left);
-        }
-        else if(parent.data.compareTo(data) < 0) {
-            parent.right = insert(parent.right, data);
-            parent.right.parent = parent;
-            checkColor(parent.right);
-        }
-        return parent;
-    }
+//    private Node insert(Node parent, Comparable data) {
+//        Node newNode = new Node(data);
+//        if(parent == null) {
+//            parent = newNode;
+//        }
+//        else if(parent.data.compareTo(data) > 0) {
+//            parent.left = insert(parent.left, data);
+//            parent.left.parent = parent;
+//            checkColor(parent.left);
+//        }
+//        else if(parent.data.compareTo(data) < 0) {
+//            parent.right = insert(parent.right, data);
+//            parent.right.parent = parent;
+//            checkColor(parent.right);
+//        }
+//        return parent;
+//    }
     private void insert(Node parent, Node newNode) {
         if (parent.data.compareTo(newNode.data) > 0) {
             if (parent.left == null) {
@@ -237,23 +240,19 @@ public class RBTree implements IRedBlackTree {
         int rightheight=0;
         Node temp = this.root;
         while(temp != null){
-
             leftheight ++;
             temp = temp.left;
-
         }
         temp=this.root;
         while(temp != null){
-
             rightheight ++;
             temp = temp.right;
-
         }
 
         if(leftheight >= rightheight)
-            return leftheight+1;
+            return leftheight;
         else
-            return rightheight+1;
+            return rightheight;
 
     }
     public void inOrder(Node node) {

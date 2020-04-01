@@ -9,16 +9,16 @@ public class Main {
         tree.insert(3);
         tree.insert(6);
         tree.insert(7);
-//        tree.insert(3);
-//        tree.insert(1);
-//        tree.insert(2);
-        tree.inOrder(tree.getRoot());
+        //tree.inOrder(tree.getRoot());
         System.out.println(tree.getRoot().data);
-//        System.out.println(tree.getRoot().left.data);
-//        System.out.println(tree.getRoot().right.data);
-//        System.out.println(tree.getRoot().right.left.data);
-//        System.out.println(tree.getRoot().right.right.data);
-//        System.out.println(tree.getRoot().left.isRed);
-//        System.out.println(tree.getRoot().right.isRed);
+        System.out.println(tree.getRoot().left.data);
+        System.out.println(tree.getRoot().right.data);
+        System.out.println(tree.getRoot().right.left.data);
+        System.out.println(tree.getRoot().right.right.data);
+        System.out.println(tree.getRoot().right.left.left.data);
+        System.out.println(tree.getRoot().right.right.left.data);
+        System.out.println(tree.getRoot().right.right.right.data);
+        System.out.println(tree.calculateHeight());
+        System.out.println(tree.search(tree.getRoot(),10));
     }
 }
