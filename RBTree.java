@@ -138,13 +138,48 @@ public class RBTree implements IRedBlackTree {
         return true;
     }
 
+    private Node getUncle (Node node) {
+        Node grandFather = node.parent.parent;
+        if (grandFather.right != node.parent)
+            return grandFather.right;
+        else
+            return grandFather.left;
+    }
+    private void correctTree(Node node) {
+        Node uncle = getUncle(node);
+        if (uncle == null || !uncle.isRed)
+            rotateTree(node);
+        else {
+            node.parent.parent.left.isRed = false;
+            node.parent.parent.right.isRed = false;
+            node.parent.parent.isRed = true;
+        }
+    }
+
+    private void checkColor(Node node) {
+        if (node.parent.isRed) {
+            correctTree(node);
+        }
+    }
     private Node insert(Node parent, Comparable data) {
-        if(parent == null)
-            return new Node(data);
-        else if(parent.data.compareTo(data)> 0)
+        Node newNode = new Node(data);
+        boolean isLeftChild = false;
+        if(parent == null) {
+            parent = newNode;
+        }
+        else if(parent.data.compareTo(data) > 0) {
             parent.left = insert(parent.left, data);
-        else if(parent.data.compareTo(data) < 0)
+            parent.left.parent = parent;
+            isLeftChild = true;
+        }
+        else if(parent.data.compareTo(data) < 0) {
             parent.right = insert(parent.right, data);
+            parent.right.parent = parent;
+        }
+        if (isLeftChild)
+            checkColor(parent.left);
+        else
+            checkColor(parent.right);
         return parent;
     }
 
