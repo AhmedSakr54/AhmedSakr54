@@ -1,24 +1,44 @@
+
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        RBTree tree = new RBTree();
-        tree.insert(2);
-        tree.insert(1);
-        tree.insert(4);
-        tree.insert(5);
-        tree.insert(9);
-        tree.insert(3);
-        tree.insert(6);
-        tree.insert(7);
-        //tree.inOrder(tree.getRoot());
-        System.out.println(tree.getRoot().data);
-        System.out.println(tree.getRoot().left.data);
-        System.out.println(tree.getRoot().right.data);
-        System.out.println(tree.getRoot().right.left.data);
-        System.out.println(tree.getRoot().right.right.data);
-        System.out.println(tree.getRoot().right.left.left.data);
-        System.out.println(tree.getRoot().right.right.left.data);
-        System.out.println(tree.getRoot().right.right.right.data);
-        System.out.println(tree.calculateHeight());
-        System.out.println(tree.search(tree.getRoot(),10));
+          
+        Dictionary dictionary = new Dictionary();
+        dictionary.LoadDic();
+        
+        Scanner scanner = new Scanner(System.in);
+        Scanner scanner2 = new Scanner(System.in);
+        System.out.println("English Dictionary:");
+        int choice =5;
+        while(choice != 0){
+        
+            
+        System.out.println("Please select ur choice :");
+        System.out.println("1.Lookup a Word \n2.Insert a word  \n3.Print size \n0.exit");
+        
+        choice = scanner.nextInt();
+        
+        if(choice == 1){
+            System.out.println("Please Enter a word :");
+            String temp = scanner2.nextLine();
+            dictionary.lookup(temp);
+            
+        }
+        else if(choice == 2){
+            System.out.println("Please Enter a word :");
+            String temp = scanner2.nextLine();
+            dictionary.insertword(temp);
+            dictionary.printsize();
+            dictionary.printHeight();
+        }
+        else if(choice == 3)
+            dictionary.printsize();
+        else
+            System.out.println("Wrong Input");
+        }
+            
+
     }
+    
 }
