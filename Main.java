@@ -37,7 +37,7 @@ public class Main {
         else
             System.out.println("Wrong Input");
         }
-            
+        System.out.println(dictionary.tree.getRoot().data);
 
     }
     

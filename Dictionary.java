@@ -18,8 +18,9 @@ import java.util.logging.Logger;
  * @author Youssef
  */
 public class Dictionary {
-    
-    RBTree tree = new RBTree();
+
+    RedBlackTree  tree = new RedBlackTree ();
+    //RBTree  tree = new RBTree ();
 
 
     public void LoadDic(){
@@ -47,11 +48,11 @@ public class Dictionary {
         }
       
 
-}
+    }
     
     public void printsize(){
         
-        System.out.println("Dictionary size = " + tree.getSize());
+           System.out.println("Dictionary size = " + tree.getSize());
         
     }
     
@@ -60,7 +61,7 @@ public class Dictionary {
             System.out.println("Word already in the dictionary !");
         else
             tree.insert(data);
-        
+
     }
     
     public void lookup(Comparable data){
@@ -75,6 +76,7 @@ public class Dictionary {
     public void printHeight() {
         System.out.println("Tree Height = " + tree.calculateHeight());
     }
+
     
     
 }

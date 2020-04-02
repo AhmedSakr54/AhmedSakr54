@@ -150,8 +150,6 @@ public class RBTree implements IRedBlackTree {
     }
     private void correctTree(Node node) {
         Node uncle = getUncle(node);
-        if (node.parent.parent == null)
-            return;
         if (uncle == null || !uncle.isRed)
             rotateTree(node);
         else {
@@ -172,7 +170,7 @@ public class RBTree implements IRedBlackTree {
             correctTree(node);
         }
     }
-//    private Node insert(Node parent, Comparable data) {
+    //    private Node insert(Node parent, Comparable data) {
 //        Node newNode = new Node(data);
 //        if(parent == null) {
 //            parent = newNode;
@@ -206,7 +204,7 @@ public class RBTree implements IRedBlackTree {
             else
                 insert(parent.right, newNode);
         }
-        checkColor(newNode);
+
     }
 
 
@@ -225,10 +223,10 @@ public class RBTree implements IRedBlackTree {
         Node node = new Node(data);
         if (this.root == null) {
             this.root = node;
-            this.root.isRed = false;
         }
         else
             insert(this.root, node);
+        checkColor(node);
         this.size++;
         this.root.isRed = false;
     }

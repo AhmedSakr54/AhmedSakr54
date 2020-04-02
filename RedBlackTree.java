@@ -116,7 +116,6 @@ public class RedBlackTree {
                 newNode = newNode.right;
             }
         }
-
         node.parent = parent;
         if (parent == null) {
             this.root = node;
@@ -150,6 +149,8 @@ public class RedBlackTree {
     public int getSize() {
         return this.size;
     }
+
+
     public boolean search(Node node, Comparable data) {
         if (node == nill)
             return false;
@@ -159,6 +160,8 @@ public class RedBlackTree {
             return search(node.right, data);
         return true;
     }
+
+
     public int calculateHeight() {
         int leftheight=0;
         int rightheight=0;
@@ -179,4 +182,6 @@ public class RedBlackTree {
             return rightheight;
 
     }
+
+
 }
