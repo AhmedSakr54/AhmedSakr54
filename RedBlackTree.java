@@ -18,17 +18,6 @@ public class RedBlackTree {
         root = nill;
     }
 
-    private Node searchTreeHelper(Node node, Comparable key) {
-        if (node == nill || key == node.data) {
-            return node;
-        }
-
-        if (node.data.compareTo(key) > 0) {
-            return searchTreeHelper(node.left, key);
-        }
-        return searchTreeHelper(node.right, key);
-    }
-
     private void correctTree(Node node) {
         Node uncle;
         while (node.parent.isRed) {
@@ -72,9 +61,6 @@ public class RedBlackTree {
         root.isRed = false;
     }
 
-    public Node searchTree(int k) {
-        return searchTreeHelper(this.root, k);
-    }
 
     public void leftRotate(Node node) {
         Node temp = node.right;
