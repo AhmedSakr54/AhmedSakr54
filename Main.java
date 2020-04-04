@@ -10,10 +10,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Scanner scanner2 = new Scanner(System.in);
         System.out.println("English Dictionary:");
-        int choice =5;
-        while(choice != 0){
-        
-            
+        int choice = 5;
+        while(true){
         System.out.println("Please select ur choice :");
         System.out.println("1.Lookup a Word \n2.Insert a word  \n3.Print size \n0.exit");
         
@@ -34,10 +32,14 @@ public class Main {
         }
         else if(choice == 3)
             dictionary.printsize();
+        else if(choice == 0)
+            break;
         else
             System.out.println("Wrong Input");
         }
-        System.out.println(dictionary.tree.getRoot().data);
+//        System.out.println(dictionary.tree.getRoot().data);
+//        System.out.println(" Word     ------    isRed?");
+//        dictionary.tree.inOrder(dictionary.tree.getRoot());
 
     }
     

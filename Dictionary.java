@@ -56,7 +56,7 @@ public class Dictionary {
         
     }
     
-    public void insertword(Comparable data){
+    public void insertword(String data){
         if(tree.search(tree.getRoot(), data))
             System.out.println("Word already in the dictionary !");
         else
@@ -64,7 +64,7 @@ public class Dictionary {
 
     }
     
-    public void lookup(Comparable data){
+    public void lookup(String data){
         
         if(tree.search(tree.getRoot(), data))
             System.out.println("Yes");
@@ -74,7 +74,7 @@ public class Dictionary {
     }
 
     public void printHeight() {
-        System.out.println("Tree Height = " + tree.calculateHeight());
+        System.out.println("Tree Height (with the root) = " + tree.calculateHeight());
     }
 
     

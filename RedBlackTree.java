@@ -2,20 +2,35 @@ public class RedBlackTree {
     private Node root;
     private Node nill;
     private int size;
+
     class Node {
-        Comparable data;
+        String data;
         Node parent;
         Node left;
         Node right;
         boolean isRed;
+        public Node(String key) {
+            parent = null;
+            data = key;
+            left = nill;
+            right = nill;
+            isRed = true;
+        }
     }
 
     public RedBlackTree() {
-        nill = new Node();
+        nill = new Node(null);
         nill.isRed = false;
         nill.left = null;
         nill.right = null;
         root = nill;
+    }
+
+    private void colorChange(Node parent, Node grandFather, Node uncle) {
+        if (uncle != null)
+            uncle.isRed = false;
+        grandFather.isRed = true;
+        parent.isRed = false;
     }
 
     private void correctTree(Node node) {
@@ -24,33 +39,27 @@ public class RedBlackTree {
             if (node.parent == node.parent.parent.right) {
                 uncle = node.parent.parent.left;
                 if (uncle.isRed) {
-                    uncle.isRed = false;
-                    node.parent.isRed = false;
-                    node.parent.parent.isRed = true;
+                    colorChange(node.parent, node.parent.parent, uncle);
                     node = node.parent.parent;
                 } else {
                     if (node == node.parent.left) {
                         node = node.parent;
                         rightRotate(node);
                     }
-                    node.parent.isRed = false;
-                    node.parent.parent.isRed = true;
+                    colorChange(node.parent, node.parent.parent, uncle);
                     leftRotate(node.parent.parent);
                 }
             } else {
                 uncle = node.parent.parent.right;
                 if (uncle.isRed) {
-                    uncle.isRed = false;
-                    node.parent.isRed = false;
-                    node.parent.parent.isRed = true;
+                    colorChange(node.parent, node.parent.parent, uncle);
                     node = node.parent.parent;
                 } else {
                     if (node == node.parent.right) {
                         node = node.parent;
                         leftRotate(node);
                     }
-                    node.parent.isRed = false;
-                    node.parent.parent.isRed = true;
+                    colorChange(node.parent, node.parent.parent, uncle);
                     rightRotate(node.parent.parent);
                 }
             }
@@ -58,11 +67,11 @@ public class RedBlackTree {
                 break;
             }
         }
-        root.isRed = false;
+        this.root.isRed = false;
     }
 
 
-    public void leftRotate(Node node) {
+    private void leftRotate(Node node) {
         Node temp = node.right;
         node.right = temp.left;
         if (temp.left != nill) {
@@ -80,7 +89,7 @@ public class RedBlackTree {
         node.parent = temp;
     }
 
-    public void rightRotate(Node node) {
+    private void rightRotate(Node node) {
         Node temp = node.left;
         node.left = temp.right;
         if (temp.right != nill) {
@@ -97,20 +106,15 @@ public class RedBlackTree {
         temp.right = node;
         node.parent = temp;
     }
-    private void insertIntoTree(Comparable key) {
-        Node node = new Node();
-        node.parent = null;
-        node.data = key;
-        node.left = nill;
-        node.right = nill;
-        node.isRed = true;
+    private void insertIntoTree(String key) {
+        Node node = new Node(key);
 
         Node parent = null;
         Node newNode = this.root;
 
         while (newNode != nill) {
             parent = newNode;
-            if (node.data.compareTo(newNode.data) < 0) {
+            if (node.data.compareToIgnoreCase(newNode.data) < 0) {
                 newNode = newNode.left;
             } else {
                 newNode = newNode.right;
@@ -119,7 +123,7 @@ public class RedBlackTree {
         node.parent = parent;
         if (parent == null) {
             this.root = node;
-        } else if (node.data.compareTo(parent.data) < 0) {
+        } else if (node.data.compareToIgnoreCase(parent.data) < 0) {
             parent.left = node;
         } else {
             parent.right = node;
@@ -137,7 +141,7 @@ public class RedBlackTree {
         correctTree(node);
     }
 
-    public void insert(Comparable key) {
+    public void insert(String key) {
         insertIntoTree(key);
         this.size++;
     }
@@ -151,12 +155,12 @@ public class RedBlackTree {
     }
 
 
-    public boolean search(Node node, Comparable data) {
+    public boolean search(Node node, String data) {
         if (node == nill)
             return false;
-        if (node.data.compareTo(data) > 0)
+        if (node.data.compareToIgnoreCase(data) > 0)
             return search(node.left, data);
-        if (node.data.compareTo(data) < 0)
+        if (node.data.compareToIgnoreCase(data) < 0)
             return search(node.right, data);
         return true;
     }
@@ -181,6 +185,14 @@ public class RedBlackTree {
         else
             return rightheight;
 
+    }
+
+    public void inOrder(Node node) {
+        if (node != null && node != nill) {
+            inOrder(node.left);
+            System.out.println(" "+node.data + "   ------   " + node.isRed);
+            inOrder(node.right);
+        }
     }
 
 
